@@ -1,0 +1,68 @@
+[
+  {
+    "clientId": 1,
+    "fullName": "Steven Ossa",
+    "email": "steven.ossa@meli.com",
+    "provincia": "valle del cauca"
+  },
+  {
+    "clientId": 2,
+    "fullName": "Pepe grillo",
+    "email": "pepe@meli.com",
+    "provincia": "antioquia"
+  },
+  {
+    "clientId": 3,
+    "fullName": "Hulk",
+    "email": "hulk@meli.com",
+    "provincia": "New york city"
+  },
+  {
+    "clientId": 4,
+    "fullName": "batman",
+    "email": "batman@meli.com",
+    "provincia": "arkham"
+  },
+  {
+    "clientId": 5,
+    "fullName": "wonder woman",
+    "email": "ww@meli.com",
+    "provincia": "amazonas"
+  },
+  {
+    "clientId": 6,
+    "fullName": "Superman",
+    "email": "superman@meli.com",
+    "provincia": "marte"
+  },
+  {
+    "clientId": 7,
+    "fullName": "Post Man",
+    "email": "postman2121@meli.com",
+    "provincia": "marte"
+  },
+  {
+    "clientId": 8,
+    "fullName": "Black Widow",
+    "email": "bwdow@meli.com",
+    "provincia": "New York City"
+  },
+  {
+    "clientId": 9,
+    "fullName": "Thanos",
+    "email": "thanos@meli.com",
+    "provincia": "Titan"
+  },
+  {
+    "clientId": 10,
+    "fullName": "Anonymous",
+    "email": "anonimo@meli.com",
+    "provincia": "provincia anonima"
+  },
+  {
+    "clientId": 11,
+    "fullName": "Steve Jobs",
+    "email": "steve@apple.com",
+    "provincia": "california"
+  }
+]

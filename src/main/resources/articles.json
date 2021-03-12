@@ -1,0 +1,122 @@
+﻿[
+  {
+    "id": 1,
+    "name": "Desmalezadora",
+    "category": "Herramientas",
+    "tradeMark": "Makita",
+    "price": 9600,
+    "quantity": 5,
+    "sendFree": true,
+    "prestige": 4
+  },
+  {
+    "id": 2,
+    "name": "Taladro",
+    "category": "Herramientas",
+    "tradeMark": "Black & Decker",
+    "price": 12500,
+    "quantity": 7,
+    "sendFree": true,
+    "prestige": 4
+  },
+  {
+    "id": 3,
+    "name": "Soldadora",
+    "category": "Herramientas",
+    "tradeMark": "Black & Decker",
+    "price": 7215,
+    "quantity": 10,
+    "sendFree": true,
+    "prestige": 3
+  },
+  {
+    "id": 4,
+    "name": "Zapatillas Deportivas",
+    "category": "Deportes",
+    "tradeMark": "Nike",
+    "price": 14000,
+    "quantity": 4,
+    "sendFree": true,
+    "prestige": 5
+  },
+  {
+    "id": 5,
+    "name": "Zapatillas Deportivas",
+    "category": "Deportes",
+    "tradeMark": "Adidas",
+    "price": 13650,
+    "quantity": 6,
+    "sendFree": true,
+    "prestige": 5
+  },
+  {
+    "id": 6,
+    "name": "Camiseta",
+    "category": "Deportes",
+    "tradeMark": "Topper",
+    "price": 2300,
+    "quantity": 2,
+    "sendFree": false,
+    "prestige": 3
+  },
+  {
+    "id": 7,
+    "name": "Redmi Note 9",
+    "category": "Celulares",
+    "tradeMark": "Xiaomi",
+    "price": 40000,
+    "quantity": 15,
+    "sendFree": true,
+    "prestige": 4
+  },
+  {
+    "id": 8,
+    "name": "Smartwatch",
+    "category": "Celulares",
+    "tradeMark": "Noga",
+    "price": 1900,
+    "quantity": 20,
+    "sendFree": false,
+    "prestige": 2
+  },
+  {
+    "id": 9,
+    "name": "Remera",
+    "category": "Indumentaria",
+    "tradeMark": "Taverniti",
+    "price": 2300,
+    "quantity": 2,
+    "sendFree": false,
+    "prestige": 3
+  },
+  {
+    "id": 10,
+    "name": "Chomba",
+    "category": "Indumentaria",
+    "tradeMark": "Taverniti",
+    "price": 2400,
+    "quantity": 6,
+    "sendFree": false,
+    "prestige": 3
+  },
+  {
+    "id": 11,
+    "name": "Medias",
+    "category": "Indumentaria",
+    "tradeMark": "Mistral",
+    "price": 500,
+    "quantity": 8,
+    "sendFree": false,
+    "prestige": 1
+  },
+  {
+    "id": 12,
+    "name": "Short",
+    "category": "Indumentaria",
+    "tradeMark": "Lacoste",
+    "price": 3900,
+    "quantity": 9,
+    "sendFree": true,
+    "prestige": 3
+  }
+]
