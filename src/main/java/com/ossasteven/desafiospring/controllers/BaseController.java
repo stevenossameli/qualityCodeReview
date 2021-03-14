@@ -26,7 +26,7 @@ public class BaseController {
         exception.setMessage(ex.getMessage());
         exception.setHttpStatus(ex.getHttpStatus());
 
-       return new ResponseEntity<>(exception, ex.getHttpStatus());
+        return new ResponseEntity<>(exception, ex.getHttpStatus());
 
     }
 }

@@ -1,10 +1,9 @@
 package com.ossasteven.desafiospring.services;
 
-import com.ossasteven.desafiospring.model.ArticleDTO;
-import com.ossasteven.desafiospring.model.TicketDTO;
 import com.ossasteven.desafiospring.exception.InvalidRequestParam;
 import com.ossasteven.desafiospring.exception.NotFoundException;
 import com.ossasteven.desafiospring.exception.StoreException;
+import com.ossasteven.desafiospring.model.ArticleDTO;
 import org.springframework.http.ResponseEntity;
 
 import java.util.HashMap;

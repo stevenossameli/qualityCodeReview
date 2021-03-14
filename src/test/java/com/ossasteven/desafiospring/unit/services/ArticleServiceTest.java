@@ -1,10 +1,10 @@
-package com.ossasteven.desafiospring.services;
+package com.ossasteven.desafiospring.unit.services;
 
 import com.ossasteven.desafiospring.exception.InvalidRequestParam;
 import com.ossasteven.desafiospring.exception.NotFoundException;
 import com.ossasteven.desafiospring.model.ArticleDTO;
-import com.ossasteven.desafiospring.repository.ArticleRepository;
 import com.ossasteven.desafiospring.repository.IArticleRepository;
+import com.ossasteven.desafiospring.services.ArticleService;
 import com.ossasteven.desafiospring.services.dependencies.GenerateTicket;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,12 +13,9 @@ import org.mockito.Mock;
 import com.ossasteven.desafiospring.util.*;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ArticleServiceTest {
 

@@ -1,11 +1,12 @@
 package com.ossasteven.desafiospring.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ossasteven.desafiospring.exception.InvalidRequestParam;
 import com.ossasteven.desafiospring.exception.NotFoundException;
+import com.ossasteven.desafiospring.exception.StoreException;
 import com.ossasteven.desafiospring.model.ArticleDTO;
 import com.ossasteven.desafiospring.services.ArticleService;
 import com.ossasteven.desafiospring.util.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -15,6 +16,10 @@ import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +43,7 @@ class ArticleControllerTest {
 
 
     //testing get all without filter
-    @Test(v)
+    @Test()
     void getArticles() throws NotFoundException, InvalidRequestParam {
 
         List<ArticleDTO> expected = GetArticles.getFourMocks();
@@ -167,5 +172,34 @@ class ArticleControllerTest {
         assertIterableEquals(expected, actual);
     }
 
+    @Test
+    void purchase() throws StoreException {
 
+        ArticleDTO martillo = new ArticleDTO();
+        martillo.setId(1L);
+        martillo.setName("Martillo de hierro");
+        martillo.setQuantity(4);
+
+        ArticleDTO llaveInglesa = new ArticleDTO();
+        llaveInglesa.setId(2L);
+        llaveInglesa.setName("Llave Inglesa roja");
+        llaveInglesa.setCategory("herramientas");
+        llaveInglesa.setQuantity(4);
+
+        List<ArticleDTO> articles = Arrays.asList(martillo, llaveInglesa);
+        HashMap<String, List<ArticleDTO>> payLoad = new HashMap<>();
+
+        payLoad.put("articles", articles);
+
+        when(service.purchaseRequest(payLoad.get("articles"), null, null)).thenReturn(new ResponseEntity<>(articles, HttpStatus.OK));
+
+        ResponseEntity<Object> expected = new ResponseEntity<>(articles, HttpStatus.OK);
+
+        ResponseEntity<Object> actual = controller.purchase(payLoad, null, null);
+
+        verify(service, atLeastOnce()).purchaseRequest(articles, null, null);
+        Assertions.assertEquals(expected, actual);
+
+
+    }
 }

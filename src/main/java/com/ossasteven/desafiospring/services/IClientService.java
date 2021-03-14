@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface IClientService<T> {
-     ResponseEntity<Object> createClient(T client) throws AlreadyExistsException, InvalidRequestParam;
+    ResponseEntity<Object> createClient(T client) throws AlreadyExistsException, InvalidRequestParam;
 
-     List<T> getAll(String param) throws NotFoundException, InvalidRequestParam;
+    List<T> getAll(String param) throws NotFoundException, InvalidRequestParam;
 }

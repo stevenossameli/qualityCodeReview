@@ -2,9 +2,9 @@ package com.ossasteven.desafiospring.dao;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ossasteven.desafiospring.model.ArticleDTO;
 import com.ossasteven.desafiospring.exception.NotFoundException;
 import com.ossasteven.desafiospring.exception.StoreException;
+import com.ossasteven.desafiospring.model.ArticleDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
@@ -12,7 +12,10 @@ import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -28,11 +31,11 @@ public class ArticleDAO implements IArticleDAO {
     @Override
     public Optional<ArticleDTO> findOne(Long id) throws StoreException {
 
-        if(articlesDB != null){
+        if (articlesDB != null) {
             Optional<ArticleDTO> item = articlesDB.stream()
                     .filter(ArticleDTO -> ArticleDTO.getId().equals(id))
                     .findFirst();
-            if(item.isPresent())
+            if (item.isPresent())
                 return item;
         }
 
@@ -103,9 +106,15 @@ public class ArticleDAO implements IArticleDAO {
 
     // Unused DAO methods
     @Override
-    public Long save(ArticleDTO articleDTO) {return null;}
+    public Long save(ArticleDTO articleDTO) {
+        return null;
+    }
+
     @Override
-    public void update(ArticleDTO articleDTO) {}
+    public void update(ArticleDTO articleDTO) {
+    }
+
     @Override
-    public void delete(Long id) {}
+    public void delete(Long id) {
+    }
 }

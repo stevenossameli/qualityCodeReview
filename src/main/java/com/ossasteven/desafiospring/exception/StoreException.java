@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
-@Getter @Setter
+@Getter
+@Setter
 public class StoreException extends Exception {
 
     private static final long serialVersionUID = -5690690211617964873L;

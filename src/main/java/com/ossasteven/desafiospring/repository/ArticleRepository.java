@@ -1,10 +1,10 @@
 package com.ossasteven.desafiospring.repository;
 
 import com.ossasteven.desafiospring.dao.IArticleDAO;
-import com.ossasteven.desafiospring.model.ArticleDTO;
 import com.ossasteven.desafiospring.exception.InvalidRequestParam;
 import com.ossasteven.desafiospring.exception.NotFoundException;
 import com.ossasteven.desafiospring.exception.StoreException;
+import com.ossasteven.desafiospring.model.ArticleDTO;
 import com.ossasteven.desafiospring.repository.dependencies.IFilterByField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,7 +16,6 @@ public class ArticleRepository implements IArticleRepository<ArticleDTO> {
 
     IArticleDAO dao;
     IFilterByField<ArticleDTO, String> filterHandler;
-
 
 
     @Autowired

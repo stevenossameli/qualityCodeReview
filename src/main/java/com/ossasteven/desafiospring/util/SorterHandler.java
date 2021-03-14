@@ -1,7 +1,7 @@
 package com.ossasteven.desafiospring.util;
 
-import com.ossasteven.desafiospring.model.ArticleDTO;
 import com.ossasteven.desafiospring.exception.InvalidRequestParam;
+import com.ossasteven.desafiospring.model.ArticleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

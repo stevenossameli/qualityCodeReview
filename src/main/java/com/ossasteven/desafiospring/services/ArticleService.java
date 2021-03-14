@@ -1,11 +1,11 @@
 package com.ossasteven.desafiospring.services;
 
-import com.ossasteven.desafiospring.model.ArticleDTO;
-import com.ossasteven.desafiospring.model.ShoppingCartDTO;
-import com.ossasteven.desafiospring.model.TicketDTO;
 import com.ossasteven.desafiospring.exception.InvalidRequestParam;
 import com.ossasteven.desafiospring.exception.NotFoundException;
 import com.ossasteven.desafiospring.exception.StoreException;
+import com.ossasteven.desafiospring.model.ArticleDTO;
+import com.ossasteven.desafiospring.model.ShoppingCartDTO;
+import com.ossasteven.desafiospring.model.TicketDTO;
 import com.ossasteven.desafiospring.repository.IArticleRepository;
 import com.ossasteven.desafiospring.services.dependencies.IGenerateTicket;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,13 +65,13 @@ public class ArticleService implements IArticleService {
 
         Double totalTicket = ticketGenerator.confirmPurchase(ticketId);
 
-        if(totalTicket == null)
+        if (totalTicket == null)
             throw new NotFoundException("the ticket with the id " + ticketId + " does not exists");
 
         HashMap<String, String> response = new HashMap<>();
         response.put("message", "Purchase completed successfully");
-        response.put("total price", ""+totalTicket);
-        response.put("Status Code", ""+HttpStatus.OK.value());
+        response.put("total price", "" + totalTicket);
+        response.put("Status Code", "" + HttpStatus.OK.value());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
 

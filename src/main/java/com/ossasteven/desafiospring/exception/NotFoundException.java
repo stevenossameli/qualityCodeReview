@@ -10,7 +10,7 @@ public class NotFoundException extends StoreException {
     private static final HttpStatus httpStatus = HttpStatus.NOT_FOUND;
 
 
-    public NotFoundException(String message){
-        super(name, message, httpStatus );
+    public NotFoundException(String message) {
+        super(name, message, httpStatus);
     }
 }

@@ -4,8 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ossasteven.desafiospring.exception.AlreadyExistsException;
 import com.ossasteven.desafiospring.exception.NotFoundException;
-import com.ossasteven.desafiospring.exception.StoreException;
-import com.ossasteven.desafiospring.model.ArticleDTO;
 import com.ossasteven.desafiospring.model.ClientDTO;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
@@ -20,30 +18,30 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository("ClientDAO")
-public class ClientDAO implements IClientDAO{
+public class ClientDAO implements IClientDAO {
 
     private List<ClientDTO> clients;
 
     private Long id;
 
     @PostConstruct
-    public void initClients(){
+    public void initClients() {
 
         loadDatabase();
-        if(clients.isEmpty()){
+        if (clients.isEmpty()) {
             this.id = 0L;
-        }else{
-            this.id = clients.get(clients.size()-1).getClientId();
+        } else {
+            this.id = clients.get(clients.size() - 1).getClientId();
         }
     }
 
     @Override
     public Optional<ClientDTO> findOne(Long id) throws NotFoundException {
-        if(clients != null){
+        if (clients != null) {
             Optional<ClientDTO> item = clients.stream()
                     .filter(ClientDTO -> ClientDTO.getClientId().equals(id))
                     .findFirst();
-            if(item.isPresent())
+            if (item.isPresent())
                 return item;
         }
 
@@ -109,16 +107,19 @@ public class ClientDAO implements IClientDAO{
 
     private void validateUser(ClientDTO client) throws AlreadyExistsException {
 
-        for (ClientDTO clientdto:
-             clients) {
-           if(clientdto.getEmail().equalsIgnoreCase(client.getEmail()))
-               throw new AlreadyExistsException("client with the email: " +client.getEmail()+ " already registered");
+        for (ClientDTO clientdto :
+                clients) {
+            if (clientdto.getEmail().equalsIgnoreCase(client.getEmail()))
+                throw new AlreadyExistsException("client with the email: " + client.getEmail() + " already registered");
         }
     }
 
     // Unused DAO methods
     @Override
-    public void update(ClientDTO clientDTO) {}
+    public void update(ClientDTO clientDTO) {
+    }
+
     @Override
-    public void delete(Long id) {}
+    public void delete(Long id) {
+    }
 }

@@ -1,11 +1,11 @@
 package com.ossasteven.desafiospring.services.dependencies;
 
+import com.ossasteven.desafiospring.exception.InvalidRequestParam;
+import com.ossasteven.desafiospring.exception.StoreException;
 import com.ossasteven.desafiospring.model.ArticleDTO;
 import com.ossasteven.desafiospring.model.ClientDTO;
 import com.ossasteven.desafiospring.model.ShoppingCartDTO;
 import com.ossasteven.desafiospring.model.TicketDTO;
-import com.ossasteven.desafiospring.exception.InvalidRequestParam;
-import com.ossasteven.desafiospring.exception.StoreException;
 import com.ossasteven.desafiospring.repository.IArticleRepository;
 import com.ossasteven.desafiospring.repository.IClientRepository;
 import com.ossasteven.desafiospring.validation.PurchaseValidation;
@@ -96,7 +96,7 @@ public class GenerateTicket implements IGenerateTicket<TicketDTO, ShoppingCartDT
 
         ClientDTO client = clientRepository.getById(clientId);
 
-        if (!carts.containsKey(clientId) && client!=null)
+        if (!carts.containsKey(clientId) && client != null)
             return generateNewCart(cartComponents, clientId);
 
         return updateShoppingCart(cartComponents, clientId);
@@ -111,7 +111,6 @@ public class GenerateTicket implements IGenerateTicket<TicketDTO, ShoppingCartDT
     private ShoppingCartDTO generateNewCart(List<ArticleDTO> cartComponents, Long clientId) throws StoreException {
         ShoppingCartDTO newCArt = new ShoppingCartDTO();
         TicketDTO ticket = generateTicket(cartComponents);
-
 
 
         List<ArticleDTO> articles = new ArrayList<>(ticket.getArticles());
