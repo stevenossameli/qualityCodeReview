@@ -44,7 +44,6 @@ public class ArticleService implements IArticleService {
 
         body.put("statusCode", HttpStatus.OK.value());
 
-
         if (isCart == null || !isCart) {
             TicketDTO ticket = ticketGenerator.generateTicket(articles);
             if (ticket != null) {

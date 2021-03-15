@@ -1,7 +1,9 @@
 package com.ossasteven.desafiospring.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ossasteven.desafiospring.exception.StoreException;
 import com.ossasteven.desafiospring.model.ArticleDTO;
 import com.ossasteven.desafiospring.services.ArticleService;
 import com.ossasteven.desafiospring.util.GetArticles;
@@ -13,6 +15,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -24,6 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -62,6 +66,7 @@ public class HttpArticleControllerTest {
         Assertions.assertIterableEquals(expected, res);
     }
 
+
     @Test
     public void verifyPurchaseRequest() throws Exception {
 
@@ -93,7 +98,7 @@ public class HttpArticleControllerTest {
                 .andReturn();
 
         // Then
-        TypeReference<HashMap<String, Object>> type = new TypeReference<HashMap<String, Object>>() {};
+    TypeReference<HashMap<String, Object>> type = new TypeReference<HashMap<String, Object>>() {};
         HashMap<String, Object> actualRes = new ObjectMapper().readValue(result.getResponse().getContentAsString(), type);
         String articlesJson = new ObjectMapper().writeValueAsString(actualRes.get("articles"));
         List<ArticleDTO> actual = new ObjectMapper().readValue(articlesJson, new TypeReference<List<ArticleDTO>>(){});
@@ -102,5 +107,34 @@ public class HttpArticleControllerTest {
 
         Assertions.assertIterableEquals(expected, actual);
 
+    }
+
+
+    @Test
+    public void checkInvalidParam() throws Exception {
+
+        // Arrange
+        ArticleDTO martillo = new ArticleDTO();
+        martillo.setId(1L);
+        martillo.setName("Martillo de hierro");
+        martillo.setQuantity(4);
+        List<ArticleDTO> list = Arrays.asList(martillo);
+       Mockito.when(service.purchaseRequest(list, null, null)).thenReturn(new ResponseEntity<>(list, HttpStatus.OK));
+
+       // Act
+
+        HashMap<String, List<ArticleDTO>> payLoad = new HashMap<>();
+        payLoad.put("items", list);
+
+        String json = new ObjectMapper().writeValueAsString(payLoad);
+        MvcResult result = mockMvc.perform(post("/api/v1/purchase-request")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andExpect(status().is4xxClientError())
+                .andReturn();
+
+        HashMap<String, String> actualRes = new ObjectMapper().readValue(result.getResponse().getContentAsString(), new TypeReference<HashMap<String, String>>() {});
+
+        Assertions.assertEquals("Invalid request param", actualRes.get("name"));
     }
 }

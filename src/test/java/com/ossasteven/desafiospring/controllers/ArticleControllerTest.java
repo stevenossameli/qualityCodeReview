@@ -5,26 +5,21 @@ import com.ossasteven.desafiospring.exception.NotFoundException;
 import com.ossasteven.desafiospring.exception.StoreException;
 import com.ossasteven.desafiospring.model.ArticleDTO;
 import com.ossasteven.desafiospring.services.ArticleService;
-import com.ossasteven.desafiospring.util.*;
+import com.ossasteven.desafiospring.util.GetArticles;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-
-import static org.mockito.Mockito.*;
-
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.mockito.Mockito.*;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -100,7 +95,7 @@ class ArticleControllerTest {
     void testAscendingOrder() throws NotFoundException, InvalidRequestParam {
         List<ArticleDTO> expected = GetArticles.getFourMocks();
 
-        Comparator<ArticleDTO> comparator = (a,b) -> a.getName().compareToIgnoreCase(b.getName());
+        Comparator<ArticleDTO> comparator = (a, b) -> a.getName().compareToIgnoreCase(b.getName());
         GetArticles.sortList(expected, comparator);
 
         HashMap<String, String> params = new HashMap<>();
@@ -120,7 +115,7 @@ class ArticleControllerTest {
     void testDescendingOrder() throws NotFoundException, InvalidRequestParam {
         List<ArticleDTO> expected = GetArticles.getFourMocks();
 
-        Comparator<ArticleDTO> comparator = (a,b) -> b.getName().compareToIgnoreCase(a.getName());
+        Comparator<ArticleDTO> comparator = (a, b) -> b.getName().compareToIgnoreCase(a.getName());
         GetArticles.sortList(expected, comparator);
 
         HashMap<String, String> params = new HashMap<>();
@@ -139,7 +134,7 @@ class ArticleControllerTest {
 
         List<ArticleDTO> expected = GetArticles.getFourMocks();
 
-        Comparator<ArticleDTO> comparator = (a,b) -> b.getPrice().compareTo(a.getPrice());
+        Comparator<ArticleDTO> comparator = (a, b) -> b.getPrice().compareTo(a.getPrice());
         GetArticles.sortList(expected, comparator);
 
         HashMap<String, String> params = new HashMap<>();
@@ -199,6 +194,34 @@ class ArticleControllerTest {
 
         verify(service, atLeastOnce()).purchaseRequest(articles, null, null);
         Assertions.assertEquals(expected, actual);
+
+
+    }
+
+    @Test
+    void articleNotFount() throws StoreException {
+        ArticleDTO article = new ArticleDTO();
+        article.setId(80L);
+        article.setName("Mouse Logitech");
+        article.setCategory("Gadgets");
+        article.setQuantity(1);
+
+        HashMap<String, List<ArticleDTO>> payLoad = new HashMap<>();
+
+        List<ArticleDTO> list = new ArrayList<>();
+        payLoad.put("articles", list);
+
+        list.add(article);
+
+        when(service.purchaseRequest(list, null, null)).thenThrow(new NotFoundException("Product not found"));
+
+
+        NotFoundException exception = Assertions.assertThrows(NotFoundException.class, () -> {
+            controller.purchase(payLoad, null, null);
+        });
+
+
+        Assertions.assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
 
 
     }

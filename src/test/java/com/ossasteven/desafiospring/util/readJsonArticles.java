@@ -3,6 +3,7 @@ package com.ossasteven.desafiospring.util;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ossasteven.desafiospring.model.ArticleDTO;
+import com.ossasteven.desafiospring.model.ClientDTO;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
@@ -33,5 +34,26 @@ public class readJsonArticles {
             e.printStackTrace();
         }
         return data;
+    }
+
+    public static List<ClientDTO> loadClientsDB() {
+        List<ClientDTO> clients = new ArrayList<>();
+        File file = null;
+        try {
+            file = ResourceUtils.getFile("src/main/resources/clients.json");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        TypeReference<List<ClientDTO>> typeRef = new TypeReference<>() {
+        };
+
+        try {
+            clients = objectMapper.readValue(file, typeRef);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return clients;
     }
 }
